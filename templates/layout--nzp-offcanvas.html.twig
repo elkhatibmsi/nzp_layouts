@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a one column layout.
+ *
+ * This template provides a two column display layout with full width areas at
+ * the top, bottom and in the middle.
+ *
+ * Available variables:
+ * - content: The content for this layout.
+ * - attributes: HTML attributes for the layout <div>.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set oc_id = settings.oc_id_toggle ? settings.oc_custom_id : random(10000, 10000000) %}
+{% if content %}
+    <div{{attributes}}> 
+
+    {% if settings.oc_id_toggle == false %}
+        <button class="c-button btn js-offcanvas-trigger" data-offcanvas-trigger="oc-{{ oc_id }}">{{settings.oc_label}}</button>
+    {% endif %}
+        <aside aria-hidden="false" class="js-offcanvas" data-offcanvas-options='{"modifiers":"{{settings.oc_position}},overlay"}' id="oc-{{ oc_id }}">
+            <div class="l-wrapper" style="padding:2em;">
+                {{ content.content }}
+            </div>
+        </aside>
+
+    </div>
+
+{% endif %}
